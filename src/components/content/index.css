@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Raleway";
+  src: url("fonts/Raleway-Regular.ttf") format("truetype")
+}
+
+.network-types-container{display:flex; flex-direction: row; justify-content:space-around; margin-top:10px;}
+.network-type{background-color:#1c1e22; border:1px solid #007549; color:#ffffff; font-size:18px; font-family:Raleway, sans-serif; text-align:center; padding:10px; margin:20px; border-radius:2px; transition: all .2s ease-in;}
+.network-type:hover{background-color:#0CAA41; border:1px solid #0CAA41; cursor:pointer;}
+.active{background-color:#0CAA41; border:1px solid #0CAA41;}
+
+.network-properties-container{display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-around;}
+.network-properties{color:rgba(255, 255, 255, 0.85); font-size:16px; flex: 1 0 400px; padding:20px;}
+.network-properties:hover{background:rgba(255, 255, 255, 0.10); color:#ffffff}
