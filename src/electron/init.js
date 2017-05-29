@@ -29,7 +29,7 @@ function createWindow() {
     mainWindow.webContents.on('did-finish-load', function() {
       mainWindow.show();
       // Open the DevTools.
-      mainWindow.webContents.openDevTools();
+      //mainWindow.webContents.openDevTools();
     });
 
 

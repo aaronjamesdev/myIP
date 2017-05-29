@@ -23,5 +23,5 @@
     "dev": "nf start -p 3000"
   },
   "author": "Aaron James <aaronjamesdev@gmail.com>",
-  "license": "MIT",
+  "license": "MIT"
 }
