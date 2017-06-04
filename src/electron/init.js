@@ -1,3 +1,9 @@
+const setupEvents = require(__dirname + '/../../installers/setup');
+if(setupEvents.handleSquirrelEvent()) {
+  // squirrel event handled and app will exit in 1000ms, so don't do anything else
+    return;
+}
+
 const electron = require('electron');
 
 // Module to control application life.
@@ -15,17 +21,17 @@ let mainWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({width: 1186, height: 660, minHeight:660, minWidth:960, frame: false, show: false,
-                                    backgroundColor: '#1c1e22', icon: __dirname + '/../myip.ico'});
+                                    backgroundColor: '#1c1e22', icon: __dirname + '/../myip.ico', webPreferences: {webSecurity: false}});
     global.mainWindow = mainWindow;
     mainWindow.setMenu(null);
 
     // and load the index.html of the app.
-    const startUrl = process.env.ELECTRON_START_URL || url.format({
-            pathname: path.join(__dirname, '/../build/index.html'),
-            protocol: 'file:',
-            slashes: true
-        });
-    mainWindow.loadURL(startUrl);
+    mainWindow.loadURL(
+      process.env.ELECTRON_DEV
+          ? 'http://localhost:3000' // Dev server ran by react-scripts
+          : `file://${path.join(__dirname, '/../../build/index.html')}` // Bundled application
+    );
+    
     mainWindow.webContents.on('did-finish-load', function() {
       mainWindow.show();
       // Open the DevTools.

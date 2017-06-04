@@ -1,11 +1,16 @@
 {
   "name": "myip",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "myIP is a demo windows application that shows installed network interfaces and their properties.",
   "private": true,
   "devDependencies": {
+    "concurrently": "^3.4.0",
+    "cross-env": "^5.0.0",
     "electron": "^1.4.14",
-    "foreman": "^2.0.0",
-    "react-scripts": "0.8.5"
+    "electron-packager": "^8.7.0",
+    "electron-winstaller": "^2.5.2",
+    "react-scripts": "0.8.5",
+    "wait-on": "^2.0.2"
   },
   "dependencies": {
     "react": "^15.4.2",
@@ -15,13 +20,22 @@
   "homepage": "./",
   "main": "src/electron/init.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "react-start": " cross-env BROWSER=none react-scripts start",
+    "electron-start": "cross-env ELECTRON_DEV=1 electron .",
+    "start": "concurrently \"yarn react-start\" \"wait-on http://localhost:3000/ && yarn electron-start\"",
+    "react-build": "react-scripts build",
+    "electron-build": "electron-packager ./ --overwrite --asar=true --platform=win32 --out=release-builds --icon=src/myip.ico --win32metadata.OriginalFilename=myip.exe --win32metadata.FileDescription=MyIP --win32metadata.ProductName=MyIP --prune=true --appCopyright=\"Copyright (C) 2017 Aaron James\"",
+    "build": "yarn react-build && yarn electron-build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "electron": "electron .",
-    "dev": "nf start -p 3000"
+    "create-installer-win": "node installers/windows/installer.js"
   },
+  "repository": "https://github.com/aaronjamesdev/myIP",
+  "keywords": [
+    "Electron",
+    "react",
+    "react desktop"
+  ],
   "author": "Aaron James <aaronjamesdev@gmail.com>",
   "license": "MIT"
 }
